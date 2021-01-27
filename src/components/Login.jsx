@@ -46,6 +46,7 @@ class Login extends Component {
                     console.log(data)
                     let token= data.token;
                     localStorage.setItem('token',token)
+                    localStorage.setItem('id', data._id)
                     this.setState({
                        user: {
                            email: '',
