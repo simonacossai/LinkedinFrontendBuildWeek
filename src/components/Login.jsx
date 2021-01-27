@@ -43,7 +43,8 @@ class Login extends Component {
                 if (response.ok) {
                     alert('Comment added!')
                     let data = await response.json()
-                    console.log(data.token)
+                    let token= data.token;
+                    localStorage.setItem('token',token)
                     this.setState({
                        user: {
                            email: '',
