@@ -41,7 +41,7 @@ class Login extends Component {
                            })
                     })
                 if (response.ok) {
-                    alert('Comment added!')
+                    alert('Logged in!')
                     let data = await response.json()
                     console.log(data)
                     let token= data.token;
@@ -61,6 +61,14 @@ class Login extends Component {
                 console.log(e)
                 
             }
+        }
+        componentDidMount() {
+            let token = localStorage.getItem("token");
+            if(token){
+                this.props.history.push('/home')
+
+            }
+
         }
     
     render() {

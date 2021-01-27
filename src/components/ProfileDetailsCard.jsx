@@ -11,8 +11,8 @@ export default class ProfileDetailsCard extends Component {
     }
     getuser = async () => {
         try {
-            var id = localStorage.getItem("id");
-            var token = localStorage.getItem("token");
+            let id = localStorage.getItem("id");
+            let token = localStorage.getItem("token");
             console.log(id, token);
             let response = await fetch(
                 `${process.env.REACT_APP_BASE_URL}/user/${id}`,

@@ -46,7 +46,7 @@ class Signup extends Component {
                })
         })
         if (response.ok) {
-            alert('Comment added!')
+            alert('New user registered!')
             let data = await response.json()
             console.log(data)
             this.setState({

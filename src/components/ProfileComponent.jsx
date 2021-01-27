@@ -33,7 +33,6 @@ export default class ProfileComponent extends Component {
           }
         );
         let userProfile = await response.json();
-        console.log(userProfile);
         this.setState({ userProfile });
         
     } catch (error) {
@@ -42,13 +41,15 @@ export default class ProfileComponent extends Component {
    
   };
 
-  /*getUsersProfile = async () => {
+  getUsersProfile = async () => {
+    let token = localStorage.getItem("token");
+    try{
     let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/",
+      `${process.env.REACT_APP_BASE_URL}/user`,
       {
         method: "GET",
         headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          authtoken: `${token}`,
         }),
       }
     );
@@ -59,11 +60,14 @@ export default class ProfileComponent extends Component {
     } else {
       <Alert>Opps, an error occured: </Alert>;
     }
-  };*/
+  }catch(e){
+    console.log(e)
+  }
+  };
 
   componentDidMount() {
     this.getUserProfile();
-    //this.getUsersProfile();
+    this.getUsersProfile();
   }
 
   /*componentDidUpdate() {
@@ -90,7 +94,7 @@ export default class ProfileComponent extends Component {
                            <ModifyProfileCard/>
                            <AnnounceCard/>
                            {this.state.allUsersProfile.length !== 0 ?<> <Category title="People also viewed" usersProfile ={this.state.allUsersProfile} />
-                           <Category title="People you may know" usersProfile ={this.state.allUsersProfile.slice(5)} /> 
+                           <Category title="People you may know" usersProfile ={this.state.allUsersProfile} /> 
                             </>:  <Loader />}                      
                         </Col>
                     </Row>
