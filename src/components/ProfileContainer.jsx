@@ -12,6 +12,7 @@ export default class ProfileContainer extends Component {
     state={
         user: [],
         profile:[], 
+        userImage: null,
         display:false,
     }
 
@@ -20,33 +21,40 @@ export default class ProfileContainer extends Component {
     HandleFile = (e) => {
         const formData = new FormData();
         formData.append("userImage", e.target.files[0]);
-        this.setState({ profile: formData });
-        this.setState({display: true})
+        console.log(formData);
+        this.setState({display:true})
+        this.setState({ userImage: formData });
     };
-    PostImage = async () => {
-        try {
-            var token = localStorage.getItem("token");
-            let response = await fetch(
-                `http://localhost:3001:/user/${this.props.userProfile.id}/upload`,
-                {
-                    method: "PUT",
-                    body: JSON.stringify(this.state.user),
-                    headers: new Headers({
-                        authtoken: `${token}`,
-                      }),
-                }
-            );
-            if (response.ok) {
 
-                this.setState({display:false})
-            } else {
-                const error = await response.json();
+   
+        //this is the post of the image triggered into the post method for the product itself
+        PostImage = async (id) => {
+            let token = localStorage.getItem("token");
+            console.log(id, token)
+            try {
+                let response = await fetch(
+                    `http://localhost:3001/user/${id}/upload`,
+                    {
+                        method: "PUT",
+                        body: this.state.userImage,
+                        headers: new Headers({
+                            authtoken: `${token}`,
+                        }),
+                    }
+                );
+                if (response.ok) {
+                    this.setState({display:false})
+                    this.fetchUser()
+                    console.log("ok")
+                } else {
+                    const error = await response.json();
+                    console.log(error);
+                }
+            } catch (error) {
                 console.log(error);
+                alert(error)
             }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+        };
     render() {
         return (
           <Card className="card-user-profile">
@@ -58,14 +66,14 @@ export default class ProfileContainer extends Component {
                         <input
                       type="file"
                       id="file-pic"
-                      onChange={this.HandleFile}
+                      onChange={(e) =>this.HandleFile(e)}
                       accept="image/*"
                     />
                     <FcAddImage className="upload-profile-pic" />
                     </div>
                     <img src={this.props.userProfile.image ?? "https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0"} className="profile-image" />
                     <div className="buttons">
-                    <Button onClick={this.PostImage} className={this.state.display===true ? "display-button mr-2" : "not-display-button"}>Upload</Button>
+                    <Button onClick={()=>this.PostImage(this.props.userProfile.id)} className={this.state.display===true ? "display-button mr-2" : "not-display-button"}>Upload</Button>
                         <Button className="add-profile-button mr-2">Add profile section <RiArrowDownSFill className="m-0 p-0" style={{ fontSize: "17px" }} /></Button>
                         <Button className="more-button mr-1 py-0">More...</Button>
                         <Button className="pencil-edit-button"><FaPencilAlt /></Button>
