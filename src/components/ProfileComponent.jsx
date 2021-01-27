@@ -81,7 +81,7 @@ export default class ProfileComponent extends Component {
                 <Container>
                     <Row className="mt-5">
                         <Col md={8}>
-                            {this.state.userProfile.length !== 0 ? <ProfileContainer userProfile={this.state.userProfile} /> :  <Loader />}
+                            {this.state.userProfile.length !== 0 ? <ProfileContainer userProfile={this.state.userProfile} fetchUser={this.getUserProfile}/> :  <Loader />}
                             <Dashboard />
                             <Experience experience_id = {this.props.match.params.id}/>
                             <Interests/>

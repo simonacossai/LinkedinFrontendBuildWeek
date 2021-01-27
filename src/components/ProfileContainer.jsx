@@ -21,7 +21,6 @@ export default class ProfileContainer extends Component {
     HandleFile = (e) => {
         const formData = new FormData();
         formData.append("userImage", e.target.files[0]);
-        console.log(formData);
         this.setState({display:true})
         this.setState({ userImage: formData });
     };
@@ -44,8 +43,7 @@ export default class ProfileContainer extends Component {
                 );
                 if (response.ok) {
                     this.setState({display:false})
-                    this.fetchUser()
-                    console.log("ok")
+                    this.props.fetchUser()
                 } else {
                     const error = await response.json();
                     console.log(error);
