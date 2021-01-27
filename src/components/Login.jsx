@@ -43,6 +43,7 @@ class Login extends Component {
                 if (response.ok) {
                     alert('Comment added!')
                     let data = await response.json()
+                    console.log(data)
                     let token= data.token;
                     localStorage.setItem('token',token)
                     this.setState({
@@ -51,6 +52,7 @@ class Login extends Component {
                            password: '',
                       }
                     })
+                    this.props.history.push('/home')
                 } else {
                     console.log('please check again')
                 }
