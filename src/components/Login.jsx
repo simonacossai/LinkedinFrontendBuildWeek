@@ -66,9 +66,7 @@ class Login extends Component {
             let token = localStorage.getItem("token");
             if(token){
                 this.props.history.push('/home')
-
             }
-
         }
     
     render() {
