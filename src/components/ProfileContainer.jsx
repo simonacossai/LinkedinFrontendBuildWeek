@@ -5,6 +5,7 @@ import { RiArrowDownSFill } from 'react-icons/ri';
 import { FaPencilAlt } from 'react-icons/fa';
 import {AiFillEye} from 'react-icons/ai';
 import {FcAddImage} from 'react-icons/fc';
+import cover from '../assets/cover.jpg';
 require('dotenv').config();
 
 export default class ProfileContainer extends Component {
@@ -57,7 +58,7 @@ export default class ProfileContainer extends Component {
         return (
           <Card className="card-user-profile">
                 <Card.Img variant="top"
-                    src="https://cuborosso.com/wp-content/uploads/2019/10/linkedin-background-image-elegant-awesome-linkedin-cover-ideas-pilation-of-linkedin-background-image.jpg"
+                    src={cover}
                     className="coverImage image-fluid" />
                 <Card.Body>
                 <div id="file-label">

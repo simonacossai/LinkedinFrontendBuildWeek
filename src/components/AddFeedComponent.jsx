@@ -4,6 +4,8 @@ import {BsFillInfoCircleFill} from 'react-icons/bs';
 import {IoMdAddCircle} from 'react-icons/io';
 import logo from '../assets/logo.png';
 import '../styles/Profile.css'
+import cover from '../assets/immobiliare.png';
+
 
 export default class AnnounceCard extends Component {
     render() {
@@ -13,7 +15,7 @@ export default class AnnounceCard extends Component {
               <Card.Subtitle className="d-flex justify-content-between"><p  className="text-muted text-left">Add to your feed</p><BsFillInfoCircleFill/></Card.Subtitle>
                 <Row className="d-flex">
                     <Col className="d-flex align-items-center">
-                    <img className="add-feed-icon mr-1" src="https://lh3.googleusercontent.com/proxy/muYlnWMzjdBOoMy45UQJ2iIyYL7596T-PHcni7CvcMvNVS3abK_puvfqhFfVzI7klqMpqYDp7UZWB5Kf-NYUBtt6yP9T-1lBtU5xvDtJSGUBy7sJs3OFAck"/>
+                    <img className="add-feed-icon mr-1" src={cover}/>
                     <p className="p-0 m-0">Immobiliare</p>
                     </Col>
                     <Col className="d-flex align-items-center">
@@ -23,7 +25,7 @@ export default class AnnounceCard extends Component {
 
                 <Row className="d-flex my-2">
                     <Col className="d-flex align-items-center">
-                    <img className="add-feed-icon mr-1" src="https://lh3.googleusercontent.com/proxy/muYlnWMzjdBOoMy45UQJ2iIyYL7596T-PHcni7CvcMvNVS3abK_puvfqhFfVzI7klqMpqYDp7UZWB5Kf-NYUBtt6yP9T-1lBtU5xvDtJSGUBy7sJs3OFAck"/>
+                    <img className="add-feed-icon mr-1" src={cover}/>
                     <p className="p-0 m-0">Immobiliare</p>
                     </Col>
                     <Col className="d-flex align-items-center">
@@ -32,7 +34,7 @@ export default class AnnounceCard extends Component {
                 </Row>
                 <Row className="d-flex">
                     <Col className="d-flex align-items-center">
-                    <img className="add-feed-icon mr-1" src="https://lh3.googleusercontent.com/proxy/muYlnWMzjdBOoMy45UQJ2iIyYL7596T-PHcni7CvcMvNVS3abK_puvfqhFfVzI7klqMpqYDp7UZWB5Kf-NYUBtt6yP9T-1lBtU5xvDtJSGUBy7sJs3OFAck"/>
+                    <img className="add-feed-icon mr-1" src={cover}/>
                     <p className="p-0 m-0">Immobiliare</p>
                     </Col>
                     <Col className="d-flex align-items-center">

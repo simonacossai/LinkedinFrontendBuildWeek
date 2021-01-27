@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import cover from '../assets/cover.jpg';
 import '../styles/ProfileDetailsCard.css';
 import { Card, Button, Row, Col, Container } from 'react-bootstrap';
 import {BsBookmarkFill} from 'react-icons/bs';
@@ -39,7 +39,7 @@ export default class ProfileDetailsCard extends Component {
     render() {
         return (   
                 <Card className="profile-detail-card">
-                <Card.Img variant="top" src="https://cuborosso.com/wp-content/uploads/2019/10/linkedin-background-image-elegant-awesome-linkedin-cover-ideas-pilation-of-linkedin-background-image.jpg" className="profile-detail-image"/>
+                <Card.Img variant="top" src={cover} className="profile-detail-image"/>
                 <img src={this.state.user.image} className="profile-detail-profile-pic mx-auto d-flex" />
                 <Card.Body className="pb-2">
                     <Card.Title>{this.state.user.username ?? "Username"}</Card.Title>
