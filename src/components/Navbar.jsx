@@ -38,7 +38,7 @@ let logo = './assets/logo.png';
                             </Form>
 
                             <Nav className="ml-auto">
-                            <Link to="/">
+                            <Link to="/homr">
                                 <div className="nav-link"><AiFillHome className="icon m-0 p-0" /><p>Home</p></div>
                             </Link>
                                 <Nav.Link href="#" className="nav-link"><FaUserFriends /><p>My Network</p></Nav.Link>
