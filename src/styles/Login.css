@@ -1,0 +1,37 @@
+.loginRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-linkedin {
+    width: 200px;
+}
+
+.loginContainer {
+    background-color: #EEEEEE;
+    height: 480px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    text-align: left !important;
+    box-shadow: 3px 3px 20px rgba(104, 100, 100, 0.392);
+}
+.login-p{
+    font-size: 14px;
+}
+.loginButton{
+    background-color: #24669F!important;
+}
+
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;               
+    background-color:rgba(128, 128, 128, 0.836);
+    padding: 0 10px;
+    margin: 12px 10px;
+    height: 1px;
+  }

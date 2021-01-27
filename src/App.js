@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ProfileComponent from "./components/ProfileComponent";
 import Home from "./components/Home";
 import OtherUserDetails from "./components/OtherUserDetails";
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 class App extends React.Component {
   render() {
@@ -14,6 +16,8 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <NavBar />
+        <Route path="/" exact render={(props) => <Login  {...props}/>} />
+        <Route path="/signup" exact render={(props) => <Signup  {...props}/>} />
           <Route path="/home" exact render={(props) => <Home {...props} />} />
           <Route
             path="/profile"
