@@ -14,7 +14,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <NavBar />
-          <Route path="/" exact render={(props) => <Home {...props} />} />
+          <Route path="/home" exact render={(props) => <Home {...props} />} />
           <Route
             path="/profile"
             exact
