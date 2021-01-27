@@ -9,20 +9,32 @@ export default class ProfileDetailsCard extends Component {
     state={
         user: [],
     }
-    getUserProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        let user = await response.json();
-        this.setState({user});
-    }
-
+    getuser = async () => {
+        try {
+            var id = localStorage.getItem("id");
+            var token = localStorage.getItem("token");
+            console.log(id, token);
+            let response = await fetch(
+                `${process.env.REACT_APP_BASE_URL}/user/${id}`,
+              {
+                method: "GET",
+                headers: new Headers({
+                  authtoken: `${token}`,
+                }),
+              }
+            );
+            let user = await response.json();
+            console.log(user);
+            this.setState({ user });
+            
+        } catch (error) {
+            console.log(error)
+        }
+       
+      };
 
     componentDidMount(){
-        this.getUserProfile();
+        this.getuser();
     }
     render() {
         return (   
