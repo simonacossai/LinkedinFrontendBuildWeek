@@ -14,42 +14,30 @@ export default class ProfileContainer extends Component {
         profile:[], 
         display:false,
     }
-    getUserProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        let user = await response.json();
-        this.setState({user});
-    }
 
 
-    componentDidMount(){
-        this.getUserProfile();
-    }
 
     HandleFile = (e) => {
         const formData = new FormData();
-        formData.append("profile", e.target.files[0]);
+        formData.append("userImage", e.target.files[0]);
         this.setState({ profile: formData });
         this.setState({display: true})
     };
     PostImage = async () => {
         try {
+            var token = localStorage.getItem("token");
             let response = await fetch(
-                `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/picture`,
+                `http://localhost:3001:/user/${this.props.userProfile.id}/upload`,
                 {
-                    method: "POST",
-                    body: this.state.profile,
-                    headers: {
-                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-                    },
+                    method: "PUT",
+                    body: JSON.stringify(this.state.user),
+                    headers: new Headers({
+                        authtoken: `${token}`,
+                      }),
                 }
             );
             if (response.ok) {
-                this.getUserProfile()
+
                 this.setState({display:false})
             } else {
                 const error = await response.json();
@@ -75,7 +63,7 @@ export default class ProfileContainer extends Component {
                     />
                     <FcAddImage className="upload-profile-pic" />
                     </div>
-                    <img src={this.state.user.image ?? "https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0"} className="profile-image" />
+                    <img src={this.props.userProfile.image ?? "https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0"} className="profile-image" />
                     <div className="buttons">
                     <Button onClick={this.PostImage} className={this.state.display===true ? "display-button mr-2" : "not-display-button"}>Upload</Button>
                         <Button className="add-profile-button mr-2">Add profile section <RiArrowDownSFill className="m-0 p-0" style={{ fontSize: "17px" }} /></Button>

@@ -19,21 +19,30 @@ export default class ProfileComponent extends Component {
   };
 
   getUserProfile = async () => {
-    let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/me",
-      {
-        method: "GET",
-        headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-        }),
-      }
-    );
-    let userProfile = await response.json();
-    console.log(userProfile);
-    this.setState({ userProfile });
+    try {
+        var id = localStorage.getItem("id");
+        var token = localStorage.getItem("token");
+        console.log(id, token);
+        let response = await fetch(
+            `${process.env.REACT_APP_BASE_URL}/user/${id}`,
+          {
+            method: "GET",
+            headers: new Headers({
+              authtoken: `${token}`,
+            }),
+          }
+        );
+        let userProfile = await response.json();
+        console.log(userProfile);
+        this.setState({ userProfile });
+        
+    } catch (error) {
+        console.log(error)
+    }
+   
   };
 
-  getUsersProfile = async () => {
+  /*getUsersProfile = async () => {
     let response = await fetch(
       "https://striveschool-api.herokuapp.com/api/profile/",
       {
@@ -50,21 +59,21 @@ export default class ProfileComponent extends Component {
     } else {
       <Alert>Opps, an error occured: </Alert>;
     }
-  };
+  };*/
 
   componentDidMount() {
     this.getUserProfile();
-    this.getUsersProfile();
+    //this.getUsersProfile();
   }
 
-  componentDidUpdate() {
+  /*componentDidUpdate() {
     if (this.state.showMore) {
       console.log("just entered componentDidUpdate");
       this.showUsers();
       this.setState({ showMore: false });
     }
   }
-
+*/
     render() {
      
         return (
