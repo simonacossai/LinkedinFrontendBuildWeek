@@ -28,6 +28,7 @@ export default class SinglePost extends Component {
     user: [],
     open: true,
     show: false,
+    loggedInId:'',
     click: false,
     id: "",
     post: {
@@ -48,7 +49,7 @@ export default class SinglePost extends Component {
       this.setState({ post: { text: id } });
     }
   };
-  getUserProfile = async () => {
+  /*getUserProfile = async () => {
     let token = localStorage.getItem("token");
     let id = localStorage.getItem("id");
     try {
@@ -66,12 +67,14 @@ export default class SinglePost extends Component {
     } catch (error) {
         console.log(error)
     }
-    
-    
-  };
+  };*/
 
   componentDidMount() {
-    this.getUserProfile();
+    //this.getUserProfile();
+    let loggedInId = localStorage.getItem("id");
+    this.setState({loggedInId})
+
+
   }
   handleDelete = async (id) => {
     let token = localStorage.getItem("token");
@@ -124,14 +127,14 @@ export default class SinglePost extends Component {
           <Card.Body className="px-0">
             <Row>
               <Col md={2} className="p-0 m-0 ml-2">
-                <img src={this.state.user.image && this.state.user.image} className="postProfilePic" />
+                <img src={this.props.post.user.image} className="postProfilePic" />
               </Col>
               <Col
                 md={9}
                 className="p-0 m-0 d-flex align-items-center justify-content-between"
               >
-                <p className="text-left p-0 m-0">{this.state.user.username}</p>
-                {this.state.user.username ? (
+                <p className="text-left p-0 m-0">{this.props.post.user.username}</p>
+                {this.props.post.userId === this.state.loggedInId ? (
                   <DropdownButton
                     style={{ backgroundColor: "#ffff" }}
                     className="dropdown-post"
