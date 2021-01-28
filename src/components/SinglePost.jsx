@@ -59,7 +59,7 @@ export default class SinglePost extends Component {
     try {
       // const postId = this.match.params.postId;
       let response = await fetch(
-        process.env.REACT_APP_URL + `/post/likes/${postId}/${id}`,
+        process.env.REACT_APP_BASE_URL + `/post/likes/${postId}/${id}`,
         {
           method: "POST",
           body: JSON.stringify(),
@@ -85,7 +85,7 @@ export default class SinglePost extends Component {
     let token = localStorage.getItem("token");
     let id = localStorage.getItem("id");
     try {
-      let response = await fetch(`http://localhost:4005/user/${id}`, {
+      let response = await fetch(`http://localhost:3001/user/${id}`, {
         method: "GET",
         headers: new Headers({
           authtoken: `${token}`,

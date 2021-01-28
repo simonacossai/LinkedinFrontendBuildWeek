@@ -14,7 +14,7 @@ export default class Home extends Component {
   };
   getPost = async () => {
     let token = localStorage.getItem("token");
-    let response = await fetch(process.env.REACT_APP_URL + "/posts", {
+    let response = await fetch(process.env.REACT_APP_BASE_URL + "/posts", {
       method: "GET",
       headers: new Headers({
         authtoken: `${token}`,
