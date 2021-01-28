@@ -22,24 +22,7 @@ import logo from "../assets/logo.png";
 import { Divider } from "@material-ui/core";
 
 class NavBar extends Component {
-  state = {
-    user: [],
-  };
-  getUserProfile = async () => {
-    var id = localStorage.getItem("id");
-    var token = localStorage.getItem("token");
-    let response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/user/${id}`,
-      {
-        method: "GET",
-        headers: new Headers({
-          authtoken: `${token}`,
-        }),
-      }
-    );
-    let user = await response.json();
-    this.setState({ user });
-  };
+
 
   signout=async()=>{
     localStorage.removeItem("token");
@@ -47,10 +30,7 @@ class NavBar extends Component {
     this.props.history.push('/');
   }
 
-  componentDidMount() {
-    this.getUserProfile();
-  }
-  
+
   render() {
     return (
       <>
@@ -135,27 +115,9 @@ class NavBar extends Component {
                   </Nav.Link>
                   
                   
-                  <Dropdown.Menu className="px-2">
-                    <Dropdown.Item>
-                      <Link to = "/profile">
-                        <img
-                          style={{ borderRadius: "50%", width:"50px", height:"50px" }}
-                          className="align-self-left mr-2"
-                          id="profile-image"
-                          style={{ borderRadius: "50%" }}
-                          src={this.state.user.image}
-                          alt="Generic placeholder"
-                        />
-                        <b>
-                          {this.state.user.name} {this.state.user.surname}
-                        </b>
-                      </Link>
-                      
-                    </Dropdown.Item>
-                    
-                     
+                  <Dropdown.Menu className="px-2">   
                     <Dropdown.Item to="/">
-                      <Link  to="/profile" ><Button className="request-announce-button" style={{ width: "100%" }}>View Profile</Button></Link>
+                      <Link  to="/profile" ><Button className="request-announce-button py-1" style={{ width: "100%" }}>View Profile</Button></Link>
                     </Dropdown.Item>
                    
         
