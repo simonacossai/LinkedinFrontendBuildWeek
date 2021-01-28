@@ -1,32 +1,40 @@
-import React, { Component } from 'react'
-import { Container, Row, Col, InputGroup, FormControl, Label, Button } from 'react-bootstrap';
-import '../styles/Login.css';
-import { GiPadlockOpen } from 'react-icons/gi';
-import { Link, withRouter } from 'react-router-dom'
+import React, { Component } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+  Label,
+  Button,
+} from "react-bootstrap";
+import "../styles/Login.css";
+import { GiPadlockOpen } from "react-icons/gi";
+import { Link, withRouter } from "react-router-dom";
 
 class Login extends Component {
-    viewpassword=()=>{
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-              x.type = "text";
-            } else {
-              x.type = "password";
-            }
+  viewpassword = () => {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
     }
-    state = {
-        user:{
-            email:"",
-            password:""
-        }
-    }
+  };
+  state = {
+    user: {
+      email: "",
+      password: "",
+    },
+  };
 
-        //updates the fields of the form
-        updateUser = (e) => {
-            let user = { ...this.state.user }
-            let currentId = e.currentTarget.id
-            user[currentId] = e.currentTarget.value
-            this.setState({ user })
-        }
+  //updates the fields of the form
+  updateUser = (e) => {
+    let user = { ...this.state.user };
+    let currentId = e.currentTarget.id;
+    user[currentId] = e.currentTarget.value;
+    this.setState({ user });
+  };
 
         login = async (e) => {
             e.preventDefault();
@@ -119,5 +127,7 @@ class Login extends Component {
             </div>
         )
     }
-}
-export default withRouter(Login); 
+  };
+
+
+export default withRouter(Login);
