@@ -31,6 +31,7 @@ export default class Experience_Modal extends Component {
     working: false,
     uploading: false,
     images: [],
+    token: "",
   };
 
   HandleFile = (e) => {
@@ -39,7 +40,7 @@ export default class Experience_Modal extends Component {
     this.setState({ image: formData });
   };
 
-  url = `REACT_APP_BASE_URL/experiences/profile/userName/experiences`;
+  url = `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences`;
 
   updateField = (e) => {
     let experience = { ...this.state.experience };
@@ -51,12 +52,12 @@ export default class Experience_Modal extends Component {
   PostImage = async (id) => {
     try {
       let response = await fetch(
-        `REACT_APP_BASE_URL/experiences/${id}/upload`,
+        `${process.env.REACT_APP_BASE_URL}/experiences/${id}/upload`,
         {
           method: "PUT",
           body: this.state.image,
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+            authtoken: `${this.state.token}`,
           },
         }
       );
@@ -76,14 +77,17 @@ export default class Experience_Modal extends Component {
       let response = await fetch(this.url, {
         method: "POST",
         headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
           "Content-Type": "application/json",
+          authtoken: `${this.state.token}`,
         }),
-        body: JSON.stringify(this.state.experience),
+        body: JSON.stringify({
+          ...this.state.experience,
+          username: this.props.user.username,
+        }),
       });
       if (response.ok) {
         let data = await response.json();
-        this.PostImage(data._id);
+        this.PostImage(data.id);
         this.props.onHide();
         alert("Experience Added");
       } else {
@@ -96,7 +100,7 @@ export default class Experience_Modal extends Component {
 
   handleUpdate = async (e) => {
     e.preventDefault();
-    let token = localStorage.getItem("token");
+
     let _id = localStorage.getItem("id");
     try {
       this.getUserExperience();
@@ -104,7 +108,7 @@ export default class Experience_Modal extends Component {
         method: "PUT",
         body: JSON.stringify(this.state.experience),
         headers: new Headers({
-          authtoken: `${token}`,
+          authtoken: `${this.state.token}`,
         }),
       });
 
@@ -129,8 +133,7 @@ export default class Experience_Modal extends Component {
       let response = await fetch(this.url + "/" + this.state._id, {
         method: "DELETE",
         headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-          "Content-Type": "application/json",
+          authtoken: `${this.state.token}`,
         }),
       });
       if (response.ok) {
@@ -148,11 +151,11 @@ export default class Experience_Modal extends Component {
     if (this.props.edit) {
       try {
         let response = await fetch(
-          `REACT_APP_BASE_URL/experiences/profile/userName/experiences/${this.state._id}`,
+          `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${this.state._id}`,
           {
             method: "GET",
             headers: new Headers({
-              Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+              authtoken: `${this.state.token}`,
             }),
           }
         );
@@ -184,7 +187,10 @@ export default class Experience_Modal extends Component {
   };
   componentDidMount(previousProps) {
     if (this.props._id !== "") {
-      this.setState({ _id: this.props._id });
+      this.setState({
+        _id: this.props._id,
+        token: localStorage.getItem("token"),
+      });
     }
 
     if (this.props.edit) {

@@ -19,7 +19,7 @@ class Experience extends Component {
     let token = localStorage.getItem("token");
     try {
       let response = await fetch(
-        `REACT_APP_BASE_URL/experiences/profile/userName/experiences/${this.props.match.params.userId}`,
+        `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${this.props.match.params.userId}`,
         {
           method: "GET",
           headers: new Headers({

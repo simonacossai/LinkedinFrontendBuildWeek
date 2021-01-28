@@ -19,7 +19,7 @@ class Experience extends Component {
   handleEditClose = () => this.setState({ edit: false });
   handleEditOpen = () => this.setState({ edit: true });
 
-  url = `REACT_APP_BASE_URL/experiences/profile/userName/experiences`;
+  url = `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences`;
   getExperience = async () => {
     let token = localStorage.getItem("token");
     try {
@@ -40,11 +40,11 @@ class Experience extends Component {
     this.getExperience();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.experience !== this.state.experience) {
-      this.getExperience();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.experience !== this.state.experience) {
+  //     this.getExperience();
+  //   }
+  // }
 
   render() {
     return (
@@ -83,6 +83,7 @@ class Experience extends Component {
             show={this.state.add}
             add={this.state.add}
             onHide={this.handleAddClose}
+            user={this.props.userr}
           />
         )}
         {this.state.edit && (

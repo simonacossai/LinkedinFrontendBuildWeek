@@ -95,7 +95,10 @@ export default class ProfileComponent extends Component {
                 <Loader />
               )}
               <Dashboard />
-              <Experience experience_id={this.props.match.params.id} />
+              <Experience
+                experience_id={this.props.match.params.id}
+                userr={this.state.userProfile}
+              />
               <Interests />
             </Col>
             <Col
