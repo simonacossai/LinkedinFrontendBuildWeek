@@ -4,83 +4,46 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 class AddComment extends React.Component {
   state = {
     addComment: {
-      comment: null,
-      rate: 1,
-      elementId: this.props.id,
+      text: null,
+      PostId: this.props.id,
     },
     errMessage: "",
   };
 
+  
+
+ 
+
   updateCommentField = (e) => {
     let addComment = { ...this.state.addComment };
     let currentId = e.currentTarget.id;
-
     addComment[currentId] = e.currentTarget.value;
-
     this.setState({ addComment });
-  };
-
-  componentDidUpdate = (previousProps) => {
-    if (
-      previousProps.editedCm.editCounter !== this.props.editedCm.editCounter
-    ) {
-      this.setState({
-        addComment: {
-          comment: this.props.editedCm.comment.comment,
-          rate: this.props.editedCm.comment.rate,
-          elementId: this.props.id,
-        },
-      });
-    }
   };
 
   submitComment = async (e) => {
     e.preventDefault();
+    console.log(this.state.addComment)
+    let token = localStorage.getItem("token");
     try {
-      let response;
-
-      if (this.props.editedCm.comment._id) {
-        response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/comments/" +
-            this.props.editedCm.comment._id,
-          {
-            method: "PUT",
-            body: JSON.stringify(this.state.addComment),
-            headers: new Headers({
-              "Content-Type": "application/json",
-              Authorization: process.env.REACT_APP_TOKEN,
-            }),
-          }
-        );
-      } else {
-        response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/comments/",
+      let response = await fetch(
+          "http://localhost:3001/comments/",
           {
             method: "POST",
             body: JSON.stringify(this.state.addComment),
             headers: new Headers({
-              "Content-Type": "application/json",
-              Authorization: process.env.REACT_APP_TOKEN,
+              'Content-Type': 'application/json',
+              authtoken:`${token}`,
             }),
           }
         );
-      }
-
       if (response.ok) {
-        alert(
-          `Comment ${this.props.editedCm.comment._id ? "edited!" : "saved!"}`
-        );
-        this.props.clearEditCommentState();
         this.setState({
           addComment: {
-            comment: "",
-            rate: 1,
-            elementId: this.props.id,
+            text: "",
           },
-          errMessage: "",
         });
-
-        this.props.onClick();
+        this.props.fetch()
       } else {
         console.log("an error occurred");
         let error = await response.json();
@@ -100,46 +63,37 @@ class AddComment extends React.Component {
     return (
       <>
         <Form
-          className="mt-4"
+          className="mt-4 d-flex "
           onSubmit={this.submitComment}
           style={{
             width: "100%",
             height: "50%",
           }}
         >
-          <Row className="no-gutters">
-            {this.props.meProfile.username && (
-              <Col xs={2}>
-                <img
-                  height="40px"
-                  width="40px"
-                  style={{ objectFit: "cover", borderRadius: "50%" }}
-                  src={this.props.meProfile.user.image}
-                />
-              </Col>
-            )}
-            <Col xs={10}>
+          <Row className="no-gutters justify-content-center align-items-center px-2" style={{width: "100%"}}>
+            <Col xs={12}>
               <Form.Group>
                 <Form.Control
                   type="text"
-                  name="comment"
-                  id="comment"
+                  name="text"
+                  id="text"
                   placeholder="Your comment"
-                  value={this.state.addComment.comment}
+                  value={this.state.addComment.text}
                   onChange={this.updateCommentField}
                   required
-                  className="rounded-pill py-3"
+                  style={{width:"100%"}}
+                  className="rounded-pill py-2"
                 />
               </Form.Group>
             </Col>
-            {this.state.addComment.comment && (
+            {this.state.addComment.text && (
               <Col xs={2}>
                 <Button
                   variant="primary"
                   type="submit"
                   className="py-0 px-4 rounded-pill mt-0 mb-2"
                 >
-                  {this.props.editedCm.comment._id ? "Edit" : "Post"}
+                  Post
                 </Button>
               </Col>
             )}

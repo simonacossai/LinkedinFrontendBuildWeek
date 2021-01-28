@@ -22,6 +22,7 @@ import { BsTrashFill } from "react-icons/bs";
 import { BsBookmarkFill, BsFillEyeFill } from "react-icons/bs";
 import Loader from "./Loader";
 import NewPostModal from "./NewPostModal";
+import CommentList from './CommentList';
 
 
 export default class SinglePost extends Component {
@@ -31,6 +32,7 @@ export default class SinglePost extends Component {
     show: false,
     loggedInId:'',
     click: false,
+    clicked: false,
     id: "",
     post: {
       text: "",
@@ -145,7 +147,9 @@ export default class SinglePost extends Component {
       console.log(e);
     }
   };
-
+  clicked=()=>{
+    this.setState({clicked: !this.state.clicked}, ()=>console.log(this.state.clicked))
+  }
   updatePostField = (e) => {
     this.setState({ post: { text: e.target.value } });
   };
@@ -211,7 +215,7 @@ export default class SinglePost extends Component {
               style={{ height: "400px", objectFit: "cover" }}
             />
           )}
-
+            {this.props.post.comments.length>0 ? (<p className="text-left ml-2 py-0 my-0" style={{fontSize:"12px"}}>{this.props.post.comments.length} comments</p>) : " "}
           <Card.Footer className="text-muted">
             <Row>
               <Col
@@ -227,7 +231,7 @@ export default class SinglePost extends Component {
                 />
                 Like
               </Col>
-              <Col md={3} className="m-0 p-0">
+              <Col md={3} className="m-0 p-0" onClick={()=>this.clicked()}>
                 <RiMessageLine className="mr-1" />
                 Comment
               </Col>
@@ -296,6 +300,7 @@ export default class SinglePost extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
+         {this.state.clicked ? <CommentList meProfile={this.state.user} comments={this.props.post.comments} id={this.props.post._id} fetch={this.props.fetch}/> : ""}
         </Card>
       </div>
     );
