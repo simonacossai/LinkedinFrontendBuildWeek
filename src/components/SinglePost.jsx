@@ -21,8 +21,9 @@ import { BsPencilSquare } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
 import { BsBookmarkFill, BsFillEyeFill } from "react-icons/bs";
 import Loader from "./Loader";
-
 import NewPostModal from "./NewPostModal";
+
+
 export default class SinglePost extends Component {
   state = {
     user: [],
@@ -49,28 +50,9 @@ export default class SinglePost extends Component {
       this.setState({ post: { text: id } });
     }
   };
-  /*getUserProfile = async () => {
-    let token = localStorage.getItem("token");
-    let id = localStorage.getItem("id");
-    try {
-        let response = await fetch(`http://localhost:3001/user/${id}`, {
-      method: "GET",
-      headers: new Headers({
-        authtoken: `${token}`,
-      }),
-    });
-    if(response.ok){
-        console.log(response);
-        let user = await response.json();
-        this.setState({ user });
-    }
-    } catch (error) {
-        console.log(error)
-    }
-  };*/
+
 
   componentDidMount() {
-    //this.getUserProfile();
     let loggedInId = localStorage.getItem("id");
     this.setState({loggedInId})
 
@@ -78,7 +60,7 @@ export default class SinglePost extends Component {
   }
   handleDelete = async (id) => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:3001/posts" + id, {
+    let response = await fetch("http://localhost:3001/posts/" + id, {
       method: "DELETE",
       headers: {
         authtoken: `${token}`,
@@ -134,7 +116,7 @@ export default class SinglePost extends Component {
                 className="p-0 m-0 d-flex align-items-center justify-content-between"
               >
                 <p className="text-left p-0 m-0">{this.props.post.user.username}</p>
-                {this.props.post.userId === this.state.loggedInId ? (
+                {this.props.post.userId == this.state.loggedInId ? (
                   <DropdownButton
                     style={{ backgroundColor: "#ffff" }}
                     className="dropdown-post"
