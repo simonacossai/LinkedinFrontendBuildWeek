@@ -3,7 +3,6 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import OtherUserProfileContainer from "./OtherUserProfileContainer";
 import "../styles/Profile.css";
 import ModifyProfileCard from "./ModifyProfileCard";
-import AnnounceCard from "./AnnounceCard";
 import Dashboard from "./Dashboard";
 import Category from "./Category";
 import Interests from "./Interests";
@@ -18,14 +17,14 @@ export default class ProfileComponent extends Component {
   };
 
   getUserProfile = async () => {
+    let token = localStorage.getItem("token");
     let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/" +
+      `${process.env.REACT_APP_BASE_URL}/user/`+
         this.props.match.params.userId,
-
       {
         method: "GET",
         headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+            authtoken: `${token}`,
         }),
       }
     );
@@ -34,12 +33,13 @@ export default class ProfileComponent extends Component {
   };
 
   getUsersProfile = async () => {
+    let token = localStorage.getItem("token");
     let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/",
+      `${process.env.REACT_APP_BASE_URL}/user/`,
       {
         method: "GET",
         headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          authtoken: `${token}`,
         }),
       }
     );
@@ -57,7 +57,7 @@ export default class ProfileComponent extends Component {
 
   }
 
-  componentDidUpdate(prevProps) {
+ /* componentDidUpdate(prevProps) {
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.getUserProfile();
     }
@@ -67,7 +67,7 @@ export default class ProfileComponent extends Component {
       this.setState({ showMore: false });
     }
   }
-
+*/
   render() {
     return (
       <>
@@ -96,7 +96,6 @@ export default class ProfileComponent extends Component {
               }}
             >
               <ModifyProfileCard />
-              <AnnounceCard />
               {this.state.allUsersProfile.length !== 0 ? (
                 <>
                   {" "}
@@ -106,7 +105,7 @@ export default class ProfileComponent extends Component {
                   />
                   <Category
                     title="People you may know"
-                    usersProfile={this.state.allUsersProfile.slice(5)}
+                    usersProfile={this.state.allUsersProfile}
                   />
                 </>
               ) : (

@@ -91,9 +91,6 @@ class NavBar extends Component {
                     <p>Notifications</p>
                   </div>
                 </Link>
-             
-               
-                
                 <Dropdown className="d-flex mr-2">
                   <Nav.Link>
                     <Link>
@@ -112,12 +109,10 @@ class NavBar extends Component {
                     </div>
                      
                     </Link>
-                  </Nav.Link>
-                  
-                  
+                  </Nav.Link>   
                   <Dropdown.Menu className="px-2">   
-                    <Dropdown.Item to="/">
-                      <Link  to="/profile" ><Button className="request-announce-button py-1" style={{ width: "100%" }}>View Profile</Button></Link>
+                    <Dropdown.Item className="link-profile">
+                      <Link  to="/profile" className="link-profile"><Button className="request-announce-button py-1" style={{ width: "100%" }}>View Profile</Button></Link>
                     </Dropdown.Item>
                    
         

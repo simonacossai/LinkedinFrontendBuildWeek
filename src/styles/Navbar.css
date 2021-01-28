@@ -60,3 +60,11 @@
     border-left: none !important;
   }
 }
+.request-announce-button:focus,
+.request-announce-button:active{
+  background-color:transparent !important;
+}
+.link-profile:focus,
+.link-profile:active{
+  background-color:transparent !important;
+}

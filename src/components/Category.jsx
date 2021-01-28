@@ -42,7 +42,7 @@ export default class Category extends Component {
                 </Card.Title>
                 <Card.Body className="text-left m-0 p-0  pt-4 px-3">
                     {this.state.display_users.map((user) => (
-                      <Link to={`/other-user-details/${user._id}`} style={{textDecoration:"none"}} >
+                      <Link to={`/other-user-details/${user.id}`} style={{textDecoration:"none"}} >
                         {" "}
                         <SideCard
                           imgSrc={user.image}

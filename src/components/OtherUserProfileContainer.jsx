@@ -27,9 +27,7 @@ export default class ProfileContainer extends Component {
               />
             </Button>
             <Button className="more-button mr-1 py-0">More...</Button>
-            <Button className="pencil-edit-button">
-              <FaPencilAlt />
-            </Button>
+            
           </div>
           <Card.Text className=" text-left text-black">
             <h3>
