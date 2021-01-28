@@ -39,10 +39,13 @@ export default class SinglePost extends Component {
         }
     }
     getUserProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
+        let id = localStorage.getItem("id");
+        let token = localStorage.getItem("token");
+
+        let response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/${id}`,{
             "method": "GET", 
             "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
+                authtoken: `${token}`
             })
         })
         let user = await response.json();
