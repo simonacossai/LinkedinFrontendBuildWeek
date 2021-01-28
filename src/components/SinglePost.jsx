@@ -122,7 +122,7 @@ export default class SinglePost extends Component {
   handleUpdate = async (id) => {
     let token = localStorage.getItem("token");
     try {
-      let response = await fetch(`http://localhost:4005/posts/${id}`, {
+      let response = await fetch(`http://localhost:3001/posts/${id}`, {
         method: "PUT",
         body: JSON.stringify(this.state.post),
         headers: {

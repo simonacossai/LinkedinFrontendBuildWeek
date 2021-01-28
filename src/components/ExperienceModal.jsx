@@ -19,7 +19,7 @@ export default class Experience_Modal extends Component {
       role: "",
       company: "",
       startDate: "",
-      endDate: "", //could be null
+      endDate: "",
       description: "",
       area: "",
     },
