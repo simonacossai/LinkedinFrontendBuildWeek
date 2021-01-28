@@ -55,7 +55,6 @@ export default class SinglePost extends Component {
     let token = localStorage.getItem("token");
     let id = localStorage.getItem("id");
     try {
-      // const postId = this.match.params.postId;
       let response = await fetch(
         process.env.REACT_APP_URL + `/post/likes/${postId}/${id}`,
         {
@@ -66,7 +65,6 @@ export default class SinglePost extends Component {
           }),
         }
       );
-      // console.log("GET LIKES DATA: ", this.match.params.postId);
       if (response.ok) {
         this.setState({
           wholePost: {
@@ -103,7 +101,7 @@ export default class SinglePost extends Component {
   }
   handleDelete = async (id) => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:4005/posts" + id, {
+    let response = await fetch(process.env.REACT_APP_URL + `/posts/` + id, {
       method: "DELETE",
       headers: {
         authtoken: `${token}`,
