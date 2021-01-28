@@ -1,30 +1,34 @@
-.postProfilePic{
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
+.postProfilePic {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
 }
-.dot-icon{
-    font-size: 28px;
-    color: grey;
+.dot-icon {
+  font-size: 28px;
+  color: grey;
 }
-.postCard{
-border-radius: 16px;
+.postCard {
+  border-radius: 16px;
 }
 
-.dropdown-post{
-    background-color: transparent!important;
-    border:none;
-    color: grey!important;
+.dropdown-post {
+  background-color: transparent !important;
+  border: none;
+  color: grey !important;
 }
-#dropdown-post{
-    background-color: transparent!important;
-    border:none;
-    color: grey!important;
+#dropdown-post {
+  background-color: transparent !important;
+  border: none;
+  color: grey !important;
 }
-#dropdown-post:focus{
-    outline: 0!important;
-    background-color: transparent!important;
-    box-shadow: none!important;
-    border:none;
-    color: grey!important;
+#dropdown-post:focus {
+  outline: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none;
+  color: grey !important;
+}
+
+.like-btn:hover {
+  cursor: pointer;
 }

@@ -212,7 +212,7 @@ export default class SinglePost extends Component {
             <Row>
               <Col
                 md={3}
-                className="m-0 p-0"
+                className="m-0 p-0 like-btn"
                 style={
                   this.state.click ? { color: "#0069D9" } : { color: "grey" }
                 }
