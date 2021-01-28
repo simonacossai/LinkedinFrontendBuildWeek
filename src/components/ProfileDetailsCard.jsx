@@ -8,9 +8,9 @@ export default class ProfileDetailsCard extends Component {
   state = {
     user: [],
   };
-  getUserProfile = async () => {
+  getUserProfile = async (id) => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:4005/user", {
+    let response = await fetch(`http://localhost:4005/user/${id}`, {
       method: "GET",
       headers: new Headers({
         authtoken: `${token}`,

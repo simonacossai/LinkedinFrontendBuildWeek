@@ -38,6 +38,7 @@ export default class SinglePost extends Component {
   clickLike = () => {
     this.setState({ click: !this.state.click });
   };
+
   handleClose = () => {
     this.setState({ show: false });
     this.setState({ post: { text: "" } });
@@ -48,26 +49,53 @@ export default class SinglePost extends Component {
       this.setState({ post: { text: id } });
     }
   };
+
+  likePost = async (postId) => {
+    this.clickLike();
+    let token = localStorage.getItem("token");
+    let id = localStorage.getItem("id");
+    try {
+      // const postId = this.match.params.postId;
+      let response = await fetch(
+        process.env.REACT_APP_URL + `/post/likes/${postId}/${id}`,
+        {
+          method: "POST",
+          body: JSON.stringify(),
+          headers: new Headers({
+            authtoken: `${token}`,
+          }),
+        }
+      );
+      // console.log("GET LIKES DATA: ", this.match.params.postId);
+      if (response.ok) {
+        this.setState({
+          wholePost: {
+            text: "",
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   getUserProfile = async () => {
     let token = localStorage.getItem("token");
     let id = localStorage.getItem("id");
     try {
-        let response = await fetch(`http://localhost:3001/user/${id}`, {
-      method: "GET",
-      headers: new Headers({
-        authtoken: `${token}`,
-      }),
-    });
-    if(response.ok){
-        console.log(response);
+      let response = await fetch(`http://localhost:4005/user/${id}`, {
+        method: "GET",
+        headers: new Headers({
+          authtoken: `${token}`,
+        }),
+      });
+      if (response.ok) {
         let user = await response.json();
         this.setState({ user });
-    }
+      }
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-    
-    
   };
 
   componentDidMount() {
@@ -75,7 +103,7 @@ export default class SinglePost extends Component {
   }
   handleDelete = async (id) => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:3001/posts" + id, {
+    let response = await fetch("http://localhost:4005/posts" + id, {
       method: "DELETE",
       headers: {
         authtoken: `${token}`,
@@ -89,7 +117,7 @@ export default class SinglePost extends Component {
   handleUpdate = async (id) => {
     let token = localStorage.getItem("token");
     try {
-      let response = await fetch(`http://localhost:3001/posts/${id}`, {
+      let response = await fetch(`http://localhost:4005/posts/${id}`, {
         method: "PUT",
         body: JSON.stringify(this.state.post),
         headers: {
@@ -124,7 +152,10 @@ export default class SinglePost extends Component {
           <Card.Body className="px-0">
             <Row>
               <Col md={2} className="p-0 m-0 ml-2">
-                <img src={this.state.user.image && this.state.user.image} className="postProfilePic" />
+                <img
+                  src={this.state.user.image && this.state.user.image}
+                  className="postProfilePic"
+                />
               </Col>
               <Col
                 md={9}
@@ -190,7 +221,7 @@ export default class SinglePost extends Component {
               >
                 <AiOutlineLike
                   className="mr-1"
-                  onClick={() => this.clickLike()}
+                  onClick={() => this.likePost(this.props.post._id)}
                 />
                 Like
               </Col>

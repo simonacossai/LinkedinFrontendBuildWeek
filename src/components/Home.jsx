@@ -14,7 +14,7 @@ export default class Home extends Component {
   };
   getPost = async () => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:3001/posts", {
+    let response = await fetch(process.env.REACT_APP_URL + "/posts", {
       method: "GET",
       headers: new Headers({
         authtoken: `${token}`,
@@ -22,6 +22,7 @@ export default class Home extends Component {
     });
     let posts = await response.json();
     let postsArray = posts.reverse().splice(0, 30);
+    console.log(postsArray);
     this.setState({ posts: postsArray });
   };
 
