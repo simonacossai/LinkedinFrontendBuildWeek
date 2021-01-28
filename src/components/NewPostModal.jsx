@@ -15,9 +15,10 @@ export default class NewPostModal extends Component {
     user: [],
   };
 
-  getUserProfile = async (id) => {
+  getUserProfile = async () => {
     let token = localStorage.getItem("token");
-    let response = await fetch(`http://localhost:4005/user${id}`, {
+    let id = localStorage.getItem("id");
+    let response = await fetch(`http://localhost:3001/user${id}`, {
       method: "GET",
       headers: new Headers({
         authtoken: `${token}`,
@@ -41,7 +42,7 @@ export default class NewPostModal extends Component {
     formData.append("image", this.state.post);
     formData.append("text", this.state.wholePost.text);
     try {
-      let response = await fetch("http://localhost:4005/posts", {
+      let response = await fetch("http://localhost:3001/posts", {
         method: "POST",
         body: formData,
         headers: {

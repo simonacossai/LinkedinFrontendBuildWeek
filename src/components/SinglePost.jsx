@@ -48,17 +48,26 @@ export default class SinglePost extends Component {
       this.setState({ post: { text: id } });
     }
   };
-  getUserProfile = async (id) => {
+  getUserProfile = async () => {
     let token = localStorage.getItem("token");
-    let response = await fetch(`http://localhost:4005/user${id}`, {
+    let id = localStorage.getItem("id");
+    try {
+        let response = await fetch(`http://localhost:3001/user/${id}`, {
       method: "GET",
       headers: new Headers({
         authtoken: `${token}`,
       }),
     });
-    console.log(response);
-    let user = await response.json();
-    this.setState({ user });
+    if(response.ok){
+        console.log(response);
+        let user = await response.json();
+        this.setState({ user });
+    }
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
   };
 
   componentDidMount() {
@@ -66,7 +75,7 @@ export default class SinglePost extends Component {
   }
   handleDelete = async (id) => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:4005/posts" + id, {
+    let response = await fetch("http://localhost:3001/posts" + id, {
       method: "DELETE",
       headers: {
         authtoken: `${token}`,
@@ -80,7 +89,7 @@ export default class SinglePost extends Component {
   handleUpdate = async (id) => {
     let token = localStorage.getItem("token");
     try {
-      let response = await fetch(`http://localhost:4005/posts/${id}`, {
+      let response = await fetch(`http://localhost:3001/posts/${id}`, {
         method: "PUT",
         body: JSON.stringify(this.state.post),
         headers: {
@@ -115,14 +124,14 @@ export default class SinglePost extends Component {
           <Card.Body className="px-0">
             <Row>
               <Col md={2} className="p-0 m-0 ml-2">
-                <img src={this.user.image} className="postProfilePic" />
+                <img src={this.state.user.image && this.state.user.image} className="postProfilePic" />
               </Col>
               <Col
                 md={9}
                 className="p-0 m-0 d-flex align-items-center justify-content-between"
               >
-                <p className="text-left p-0 m-0">{this.user.username}</p>
-                {this.user.username ? (
+                <p className="text-left p-0 m-0">{this.state.user.username}</p>
+                {this.state.user.username ? (
                   <DropdownButton
                     style={{ backgroundColor: "#ffff" }}
                     className="dropdown-post"

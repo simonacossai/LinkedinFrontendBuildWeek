@@ -39,7 +39,7 @@ class Login extends Component {
   login = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch("http://localhost:4005/api/user/login", {
+      let response = await fetch("http://localhost:3001/api/user/login", {
         method: "POST",
         body: JSON.stringify(this.state.user),
         headers: new Headers({
