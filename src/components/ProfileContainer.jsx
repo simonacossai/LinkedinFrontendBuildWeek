@@ -9,6 +9,12 @@ import cover from '../assets/cover.jpg';
 require('dotenv').config();
 
 export default class ProfileContainer extends Component {
+  state = {
+    user: [],
+    profile: [],
+    userImage: null,
+    display: false,
+  };
 
     state={
         user: [],

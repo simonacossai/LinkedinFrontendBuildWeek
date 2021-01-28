@@ -1,16 +1,23 @@
-import React, { Component } from 'react';
-import { Container, Row, Col, Card, ListGroup, Button, Alert } from 'react-bootstrap';
-import ProfileContainer from './ProfileContainer';
-import '../styles/Profile.css'
-import ModifyProfileCard from './ModifyProfileCard';
-import AnnounceCard from './AnnounceCard';
-import Dashboard from './Dashboard';
-import Category from './Category';
-import Interests from './Interests';
-import Experience from './Experience';
-import Loader from './Loader';
-import Footer from './Footer';
-
+import React, { Component } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  ListGroup,
+  Button,
+  Alert,
+} from "react-bootstrap";
+import ProfileContainer from "./ProfileContainer";
+import "../styles/Profile.css";
+import ModifyProfileCard from "./ModifyProfileCard";
+import AnnounceCard from "./AnnounceCard";
+import Dashboard from "./Dashboard";
+import Category from "./Category";
+import Interests from "./Interests";
+import Experience from "./Experience";
+import Loader from "./Loader";
+import Footer from "./Footer";
 
 export default class ProfileComponent extends Component {
   state = {
@@ -51,18 +58,17 @@ export default class ProfileComponent extends Component {
         headers: new Headers({
           authtoken: `${token}`,
         }),
+      });
+      if (response.ok) {
+        let allUsersProfile = await response.json();
+        console.log(allUsersProfile);
+        this.setState({ allUsersProfile });
+      } else {
+        <Alert>Opps, an error occured: </Alert>;
       }
-    );
-    if (response.ok) {
-      let allUsersProfile = await response.json();
-      console.log(allUsersProfile);
-      this.setState({ allUsersProfile });
-    } else {
-      <Alert>Opps, an error occured: </Alert>;
+    } catch (e) {
+      console.log(e);
     }
-  }catch(e){
-    console.log(e)
-  }
   };
 
   componentDidMount() {
@@ -103,4 +109,4 @@ export default class ProfileComponent extends Component {
             </>
         )
     }
-}
+  }

@@ -16,13 +16,14 @@ class Experience extends Component {
   handleShow = () => this.setState({ show: true });
 
   getExperience = async () => {
+    let token = localStorage.getItem("token");
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.match.params.userId}/experiences/`,
+        `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${this.props.match.params.userId}`,
         {
           method: "GET",
           headers: new Headers({
-            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+            authtoken: `${token}`,
           }),
         }
       );
@@ -37,7 +38,6 @@ class Experience extends Component {
     this.getExperience();
   }
 
-
   render() {
     return (
       <div>
@@ -50,7 +50,7 @@ class Experience extends Component {
                 </Card.Title>
               </Col>
               <Col className="d-flex justify-content-end">
-                <FaPlus onClick={this.handleShow} style={{color:"black"}}/>
+                <FaPlus onClick={this.handleShow} style={{ color: "black" }} />
               </Col>
             </Row>
 
