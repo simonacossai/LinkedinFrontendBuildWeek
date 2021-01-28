@@ -15,19 +15,19 @@ export default class NewPostModal extends Component {
     user: [],
   };
 
-    getUserProfile=async()=>{
-        let id = localStorage.getItem("id");
-        let token = localStorage.getItem("token");
+  getUserProfile = async () => {
+    let token = localStorage.getItem("token");
+    let id = localStorage.getItem("id");
+    let response = await fetch(process.env.REACT_APP_URL + `/user/${id}`, {
+      method: "GET",
+      headers: new Headers({
+        authtoken: `${token}`,
+      }),
+    });
+    let user = await response.json();
+    this.setState({ user });
+  };
 
-        let response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/${id}`,{
-            method: "GET",
-            headers: new Headers({
-              authtoken: `${token}`,
-            }),
-        })
-        let user = await response.json();
-        this.setState({user});
-    }
   componentDidMount() {
     this.getUserProfile();
   }
@@ -42,16 +42,14 @@ export default class NewPostModal extends Component {
     formData.append("image", this.state.post);
     formData.append("text", this.state.wholePost.text);
     try {
-      let response = await fetch("http://localhost:3001/posts", {
+      let response = await fetch(process.env.REACT_APP_URL + "/posts", {
         method: "POST",
         body: formData,
         headers: {
-          // "Content-Type": "application/json",
           authtoken: `${token}`,
         },
       });
       const dataJson = await response.json();
-      console.log(dataJson);
       if (response.ok) {
         this.setState({
           wholePost: {
