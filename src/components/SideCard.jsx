@@ -23,7 +23,7 @@ export default class SideCard extends Component {
                                 <Description description={this.props.description}  style={{color: "black", textDecoration:"none", width:"50px", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis"}}/>
                             </Col>
                             <Col md={2}  >
-                                <span className="border border-secondary rounded-circle d-flex p-0 mr-5" style={{width:"20px" , height : "20px", marginRight: "5px"}}>
+                                <span className=" d-flex p-0 mr-5" style={{width:"20px" , height : "20px", marginRight: "5px"}}>
                                     <FaUserPlus className="m-auto"  style={{color: "black", textDecoration:"none"}}/>
                                 </span>
                                 

@@ -96,7 +96,7 @@ class NavBar extends Component {
                 
                 <Dropdown className="d-flex mr-2">
                   <Nav.Link>
-                    <Link to="/">
+                    <Link>
                     <img src={logo} className="profile-img mr-1" alt="profile image" />
                     <div className="d-flex align-items-baseline">
                     <p>
