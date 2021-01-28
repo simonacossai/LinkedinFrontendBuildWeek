@@ -5,7 +5,7 @@ import {HiOutlineDotsHorizontal} from 'react-icons/hi';
 
 import '../styles/Profile.css'
 
-let logo =  './assets/logo.png';
+import logo from '../assets/logo.png';
 export default class AnnounceCard extends Component {
     render() {
         return (

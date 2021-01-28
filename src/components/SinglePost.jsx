@@ -216,7 +216,7 @@ export default class SinglePost extends Component {
             />
           )}
             {this.props.post.comments.length>0 ? (<p className="text-left ml-2 py-0 my-0" style={{fontSize:"12px"}}>{this.props.post.comments.length} comments</p>) : " "}
-          <Card.Footer className="text-muted">
+          <Card.Footer className="text-muted" style={{backgroundColor:"#fff"}}>
             <Row>
               <Col
                 md={3}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import {MdSend} from 'react-icons/md';
 
 class AddComment extends React.Component {
   state = {
@@ -70,9 +71,9 @@ class AddComment extends React.Component {
             height: "50%",
           }}
         >
-          <Row className="no-gutters justify-content-center align-items-center px-2" style={{width: "100%"}}>
-            <Col xs={12}>
-              <Form.Group>
+          <Row className="no-gutters justify-content-center align-items-center px-3" style={{width: "100%"}}>
+            <Col xs={10}>
+              <Form.Group className="mr-2">
                 <Form.Control
                   type="text"
                   name="text"
@@ -82,21 +83,21 @@ class AddComment extends React.Component {
                   onChange={this.updateCommentField}
                   required
                   style={{width:"100%"}}
-                  className="rounded-pill py-2"
+                  className="rounded-pill py-2 mr-5"
                 />
               </Form.Group>
             </Col>
-            {this.state.addComment.text && (
-              <Col xs={2}>
+            
+              <Col xs={1}>
                 <Button
                   variant="primary"
                   type="submit"
-                  className="py-0 px-4 rounded-pill mt-0 mb-2"
+                  style={{borderRadius: "50%", backgroundColor: "#225982"}}
+                  className="py-2 rounded-pill mt-0 mb-3 ml-1"
                 >
-                  Post
+                  <MdSend style={{fontSize:"16px"}}/>
                 </Button>
-              </Col>
-            )}
+              </Col>  
           </Row>
         </Form>
       </>
