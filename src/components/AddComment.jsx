@@ -92,7 +92,7 @@ class AddComment extends React.Component {
                 <Button
                   variant="primary"
                   type="submit"
-                  style={{borderRadius: "50%", backgroundColor: "#225982"}}
+                  style={{borderRadius: "50%", backgroundColor: "#225982", borderColor: "#225982"}}
                   className="py-2 rounded-pill mt-0 mb-3 ml-1"
                 >
                   <MdSend style={{fontSize:"16px"}}/>

@@ -50,7 +50,6 @@ class Experience extends Component {
                 </Card.Title>
               </Col>
               <Col className="d-flex justify-content-end">
-                <FaPlus onClick={this.handleShow} style={{ color: "black" }} />
               </Col>
             </Row>
 

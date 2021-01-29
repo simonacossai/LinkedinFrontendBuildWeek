@@ -107,7 +107,8 @@ export default class Experience_Modal extends Component {
       });
       if (response.ok) {
         let data = await response.json();
-        this.PostImage(data.id);
+        console.log(data);
+        this.PostImage(data[1].id);
         this.props.onHide();
         alert("Experience Updated");
       } else {
