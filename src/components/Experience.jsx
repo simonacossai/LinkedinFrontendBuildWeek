@@ -26,8 +26,10 @@ class Experience extends Component {
   url = `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences`;
   getExperience = async () => {
     let token = localStorage.getItem("token");
+    let id = localStorage.getItem("id");
+
     try {
-      let response = await fetch(this.url, {
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${id}`, {
         method: "GET",
         headers: new Headers({
           authtoken: `${token}`,
@@ -95,6 +97,7 @@ class Experience extends Component {
             show={this.state.edit}
             edit={this.state.edit}
             onHide={this.handleEditClose}
+            fetch={this.getExperience}
             id={this.state.id}
           />
         )}

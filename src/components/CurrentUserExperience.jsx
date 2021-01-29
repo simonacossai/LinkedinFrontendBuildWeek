@@ -64,7 +64,7 @@ class Experience extends Component {
             <FaAngleDown />
           </ListGroup.Item>
         </Card>
-        <ExperienceModal show={this.state.show} onHide={this.handleClose} />
+        
       </div>
     );
   }

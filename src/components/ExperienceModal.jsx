@@ -62,7 +62,7 @@ export default class Experience_Modal extends Component {
         }
       );
       if (response.ok) {
-        this.getUserExperience();
+        this.props.fetch();
       } else {
         const error = await response.json();
         console.log(error);
@@ -85,7 +85,7 @@ export default class Experience_Modal extends Component {
       if (response.ok) {
         let data = await response.json();
         this.PostImage(data.id);
-        this.getUserExperience();
+        this.props.fetch();
         this.props.onHide();
         alert("Experience Added");
       } else {
@@ -110,7 +110,7 @@ export default class Experience_Modal extends Component {
       if (response.ok) {
         let data = await response.json();
         this.PostImage(data.id);
-        this.getUserExperience();
+        this.props.fetch();
         this.props.onHide();
         alert("Experience Updated");
       } else {
@@ -133,6 +133,8 @@ export default class Experience_Modal extends Component {
       if (response.ok) {
         alert("Experience Deleted");
         this.props.onHide();
+        this.props.fetch();
+
       } else {
         alert("Something went wrong!");
       }
@@ -141,38 +143,6 @@ export default class Experience_Modal extends Component {
     }
   };
 
-  getUserExperience = async () => {
-    if (this.props.edit) {
-      try {
-        let response = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${this.state._id}`,
-          {
-            method: "GET",
-            headers: new Headers({
-              authtoken: `${this.state.token}`,
-            }),
-          }
-        );
-        if (response.ok) {
-          let userExperience = await response.json();
-
-          let experience = userExperience.find(
-            (experience) => experience._id === this.state._id
-          );
-          let expe = { ...this.state.experience };
-          expe.role = experience.role;
-          expe.area = experience.area;
-          expe.company = experience.company;
-          expe.description = experience.description;
-          expe.endDate = experience.endDate;
-          expe.startDate = experience.startDate;
-          this.setState({ experience: expe });
-        } else {
-          Alert("An error occured");
-        }
-      } catch (error) {}
-    }
-  };
 
   removeImage = (id) => {
     this.setState({
@@ -187,9 +157,8 @@ export default class Experience_Modal extends Component {
       });
     }
 
-    if (this.props.edit) {
-      this.getUserExperience();
-    }
+      this.props.fetch();
+
   }
 
   render() {
