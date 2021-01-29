@@ -76,7 +76,7 @@ export default class ProfileContainer extends Component {
                     />
                     <FcAddImage className="upload-profile-pic" />
                     </div>
-                    <img src={this.props.userProfile.image ?? "https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0"} className="profile-image" />
+                    <img src={this.props.userProfile.image ?? "http://placehold.it/50x50"} className="profile-image" />
                     <div className="buttons">
                     <Button onClick={()=>this.PostImage(this.props.userProfile.id)} className={this.state.display===true ? "display-button mr-2" : "not-display-button"}>Upload</Button>
                         <Button className="add-profile-button mr-2">Add profile section <RiArrowDownSFill className="m-0 p-0" style={{ fontSize: "17px" }} /></Button>
