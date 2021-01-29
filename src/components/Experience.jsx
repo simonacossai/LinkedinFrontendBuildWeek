@@ -39,7 +39,9 @@ class Experience extends Component {
         let responseExperience = await response.json();
         this.setState({ experience: responseExperience });
       }
-    } catch (e) {}
+    }catch(e){
+        console.log(e)
+    }
   };
 
   componentDidMount() {

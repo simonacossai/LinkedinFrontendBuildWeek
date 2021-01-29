@@ -1,28 +1,22 @@
-import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  ListGroup,
-  Button,
-  Alert,
-} from "react-bootstrap";
-import ProfileContainer from "./ProfileContainer";
-import "../styles/Profile.css";
-import ModifyProfileCard from "./ModifyProfileCard";
-import AnnounceCard from "./AnnounceCard";
-import Dashboard from "./Dashboard";
-import Category from "./Category";
-import Interests from "./Interests";
-import Experience from "./Experience";
-import Loader from "./Loader";
-import Footer from "./Footer";
+import React, { Component } from 'react';
+import { Container, Row, Col, Card, ListGroup, Button, Alert } from 'react-bootstrap';
+import ProfileContainer from './ProfileContainer';
+import '../styles/Profile.css'
+import ModifyProfileCard from './ModifyProfileCard';
+import AnnounceCard from './AnnounceCard';
+import Dashboard from './Dashboard';
+import Category from './Category';
+import Interests from './Interests';
+import Experience from './Experience';
+import Loader from './Loader';
+import Footer from './Footer';
+import ProfileStrength from './ProfileStrength';
 
 export default class ProfileComponent extends Component {
   state = {
     userProfile: {},
     allUsersProfile: [],
+    experience:[]
   };
 
   getUserProfile = async () => {
@@ -74,15 +68,30 @@ export default class ProfileComponent extends Component {
   componentDidMount() {
     this.getUserProfile();
     this.getUsersProfile();
+    //this.getExperience();
   }
 
-  /*componentDidUpdate() {
-    if (this.state.showMore) {
-      console.log("just entered componentDidUpdate");
-      this.showUsers();
-      this.setState({ showMore: false });
+  /*getExperience = async () => {
+    try{
+      let response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences`,
+        {
+          method: "GET",
+          headers: new Headers({
+            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }),
+        }
+      );
+      if(response.ok){
+        let responseExperience = await response.json();
+        this.setState({experience: responseExperience})
+  
+      }
+      
+    }catch(e){
+        console.log(e)
     }
-  }
+  };
 */
     render() {
      
