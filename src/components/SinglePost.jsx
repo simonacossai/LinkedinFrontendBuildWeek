@@ -23,7 +23,7 @@ import { BsBookmarkFill, BsFillEyeFill } from "react-icons/bs";
 import Loader from "./Loader";
 import NewPostModal from "./NewPostModal";
 import CommentList from './CommentList';
-
+import {BiMessageRoundedDots} from 'react-icons/bi'
 
 export default class SinglePost extends Component {
   state = {
@@ -215,7 +215,7 @@ export default class SinglePost extends Component {
               style={{ height: "400px", objectFit: "cover" }}
             />
           )}
-            {this.props.post.comments.length>0 ? (<p className="text-left ml-2 py-0 my-0" style={{fontSize:"12px"}}>{this.props.post.comments.length} comments</p>) : " "}
+            {this.props.post.comments.length>0 ? (<p className="text-left ml-2 py-0 my-0" style={{fontSize:"12px"}}><BiMessageRoundedDots className="mr-1"/>{this.props.post.comments.length} {this.props.post.comments.length>1 ? "comments" : "comment"}</p>) : " "}
           <Card.Footer className="text-muted" style={{backgroundColor:"#fff"}}>
             <Row>
               <Col
