@@ -37,7 +37,7 @@ class Signup extends Component {
     Signup=async(e)=>{
         e.preventDefault();
         try{
-        let response = await fetch('http://localhost:3001/api/user/register',{
+        let response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/user/register`,{
             method: 'POST',
             body: JSON.stringify(this.state.user),
             headers: new Headers

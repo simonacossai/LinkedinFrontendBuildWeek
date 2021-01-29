@@ -87,7 +87,7 @@ export default class SinglePost extends Component {
     let token = localStorage.getItem("token");
     let id = localStorage.getItem("id");
     try {
-      let response = await fetch(`http://localhost:3001/user/${id}`, {
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
         method: "GET",
         headers: new Headers({
           authtoken: `${token}`,
@@ -110,7 +110,7 @@ export default class SinglePost extends Component {
   }
   handleDelete = async (id) => {
     let token = localStorage.getItem("token");
-    let response = await fetch("http://localhost:3001/posts/" + id, {
+    let response = await fetch(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, {
       method: "DELETE",
       headers: {
         authtoken: `${token}`,
@@ -124,7 +124,7 @@ export default class SinglePost extends Component {
   handleUpdate = async (id) => {
     let token = localStorage.getItem("token");
     try {
-      let response = await fetch(`http://localhost:3001/posts/${id}`, {
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/posts/${id}`, {
         method: "PUT",
         body: JSON.stringify(this.state.post),
         headers: {

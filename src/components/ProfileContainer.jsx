@@ -39,7 +39,7 @@ export default class ProfileContainer extends Component {
             console.log(id, token)
             try {
                 let response = await fetch(
-                    `http://localhost:3001/user/${id}/upload`,
+                    `${process.env.REACT_APP_BASE_URL}/user/${id}/upload`,
                     {
                         method: "PUT",
                         body: this.state.userImage,

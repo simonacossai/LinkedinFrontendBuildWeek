@@ -22,7 +22,6 @@ export default class AnnounceCard extends Component {
                         <Button className="button-add-feed">+ Follow</Button>
                     </Col>
                 </Row>
-
                 <Row className="d-flex my-2">
                     <Col className="d-flex align-items-center">
                     <img className="add-feed-icon mr-1" src={cover}/>

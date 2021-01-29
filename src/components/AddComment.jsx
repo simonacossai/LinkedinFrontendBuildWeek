@@ -11,10 +11,6 @@ class AddComment extends React.Component {
     errMessage: "",
   };
 
-  
-
- 
-
   updateCommentField = (e) => {
     let addComment = { ...this.state.addComment };
     let currentId = e.currentTarget.id;
@@ -28,7 +24,7 @@ class AddComment extends React.Component {
     let token = localStorage.getItem("token");
     try {
       let response = await fetch(
-          "http://localhost:3001/comments/",
+        `${process.env.REACT_APP_BASE_URL}/comments/`,
           {
             method: "POST",
             body: JSON.stringify(this.state.addComment),

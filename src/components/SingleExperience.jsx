@@ -12,7 +12,6 @@ export default class SingeExperience extends Component {
   };
 
   render() {
-    
     return (
       <>
       <Media className="mt-2">

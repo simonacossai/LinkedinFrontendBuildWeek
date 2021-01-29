@@ -73,7 +73,7 @@ export default class Experience_Modal extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch("http://localhost:3001/experiences/profile/userName/experiences", {
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences`, {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export default class Experience_Modal extends Component {
   handleUpdate = async (e, id) => {
     e.preventDefault();
     try {
-      let response = await fetch(`http://localhost:3001/experiences/profile/userName/experiences/${this.props.id}`, {
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${this.props.id}`, {
         method: "PUT",
         body: JSON.stringify(this.state.experience),
         headers: new Headers({
@@ -122,7 +122,7 @@ export default class Experience_Modal extends Component {
   handleDelete = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch(`http://localhost:3001/experiences/profile/userName/experiences/${this.props.id}`, {
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences/${this.props.id}`, {
         method: "DELETE",
         headers: new Headers({
           authtoken: `${this.state.token}`,
