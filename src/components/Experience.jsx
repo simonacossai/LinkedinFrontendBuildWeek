@@ -48,12 +48,6 @@ class Experience extends Component {
     this.getExperience();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.experience !== this.state.experience) {
-  //     this.getExperience();
-  //   }
-  // }
-
   render() {
     return (
       <div>

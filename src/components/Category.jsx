@@ -12,7 +12,6 @@ export default class Category extends Component {
   };
 
   componentDidMount() {
-    this.setState({ all_users_profile: this.props.usersProfile });
     this.showLessUsers();
   }
 

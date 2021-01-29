@@ -145,7 +145,7 @@ export default class Experience_Modal extends Component {
       images: this.state.images.filter((image) => image.publiic_id !== id),
     });
   };
-  componentDidMount(previousProps) {
+  componentDidMount() {
       this.setState({
         _id: this.props._id,
         token: localStorage.getItem("token"),

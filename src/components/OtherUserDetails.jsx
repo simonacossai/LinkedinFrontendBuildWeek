@@ -57,17 +57,6 @@ export default class ProfileComponent extends Component {
 
   }
 
- /* componentDidUpdate(prevProps) {
-    if (this.props.match.params.userId !== prevProps.match.params.userId) {
-      this.getUserProfile();
-    }
-
-    if (this.state.showMore) {
-      this.showUsers();
-      this.setState({ showMore: false });
-    }
-  }
-*/
   render() {
     return (
       <>
