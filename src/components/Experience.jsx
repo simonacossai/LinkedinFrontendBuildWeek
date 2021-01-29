@@ -12,12 +12,16 @@ class Experience extends Component {
     add: false,
     edit: false,
     experience: [],
+    id: null,
   };
 
   handleAddClose = () => this.setState({ add: false });
   handleAddOpen = () => this.setState({ add: true });
   handleEditClose = () => this.setState({ edit: false });
-  handleEditOpen = () => this.setState({ edit: true });
+  handleEditOpen = (id) => {
+    this.setState({ edit: true });
+    this.setState({id})
+  }
 
   url = `${process.env.REACT_APP_BASE_URL}/experiences/profile/userName/experiences`;
   getExperience = async () => {
@@ -67,7 +71,7 @@ class Experience extends Component {
             {this.state.experience &&
               this.state.experience.map((element) => (
                 <SingleExperience
-                  key={element._id}
+                  key={element.id}
                   experience={element}
                   onClick={this.handleEditOpen}
                 />
@@ -91,7 +95,7 @@ class Experience extends Component {
             show={this.state.edit}
             edit={this.state.edit}
             onHide={this.handleEditClose}
-            _id={this.props._id}
+            id={this.state.id}
           />
         )}
       </div>

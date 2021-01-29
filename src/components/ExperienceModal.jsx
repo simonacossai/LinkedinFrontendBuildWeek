@@ -36,7 +36,7 @@ export default class Experience_Modal extends Component {
 
   HandleFile = (e) => {
     const formData = new FormData();
-    formData.append("experience", e.target.files[0]);
+    formData.append("experienceImage", e.target.files[0]);
     this.setState({ image: formData });
   };
 
@@ -56,9 +56,9 @@ export default class Experience_Modal extends Component {
         {
           method: "PUT",
           body: this.state.image,
-          headers: {
+          headers: new Headers({
             authtoken: `${this.state.token}`,
-          },
+          }),
         }
       );
       if (response.ok) {
@@ -74,20 +74,18 @@ export default class Experience_Modal extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch(this.url, {
+      let response = await fetch("http://localhost:3001/experiences/profile/userName/experiences", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",
           authtoken: `${this.state.token}`,
         }),
-        body: JSON.stringify({
-          ...this.state.experience,
-          username: this.props.user.username,
-        }),
+        body: JSON.stringify(this.state.experience)
       });
       if (response.ok) {
         let data = await response.json();
         this.PostImage(data.id);
+        this.getUserExperience();
         this.props.onHide();
         alert("Experience Added");
       } else {
@@ -98,23 +96,20 @@ export default class Experience_Modal extends Component {
     }
   };
 
-  handleUpdate = async (e) => {
+  handleUpdate = async (e, id) => {
     e.preventDefault();
-
-    let _id = localStorage.getItem("id");
     try {
-      this.getUserExperience();
-      let response = await fetch(this.url + "/" + this.state._id, {
+      let response = await fetch(`http://localhost:3001/experiences/profile/userName/experiences/${this.props.id}`, {
         method: "PUT",
         body: JSON.stringify(this.state.experience),
         headers: new Headers({
+          "Content-Type": "application/json",
           authtoken: `${this.state.token}`,
         }),
       });
-
       if (response.ok) {
         let data = await response.json();
-        this.PostImage(data._id);
+        this.PostImage(data.id);
         this.getUserExperience();
         this.props.onHide();
         alert("Experience Updated");
@@ -128,9 +123,8 @@ export default class Experience_Modal extends Component {
 
   handleDelete = async (e) => {
     e.preventDefault();
-    e.preventDefault();
     try {
-      let response = await fetch(this.url + "/" + this.state._id, {
+      let response = await fetch(`http://localhost:3001/experiences/profile/userName/experiences/${this.props.id}`, {
         method: "DELETE",
         headers: new Headers({
           authtoken: `${this.state.token}`,

@@ -25,7 +25,7 @@ export default class SingeExperience extends Component {
         <Media.Body>
           <h5 className="d-flex">{this.props.experience.role}</h5>
           <Link to={"/profile/edit/position/" + this.props.experience._id}><span className="d-flex justify-content-end mr-3">
-          <FaPen onClick={this.props.onClick} style={{color:"grey"}}/>
+          <FaPen onClick={()=>this.props.onClick(this.props.experience.id)} style={{color:"grey"}}/>
           </span></Link>
           <p className="d-flex">{this.props.experience.company}</p>
           <p className="d-flex">
