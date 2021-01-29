@@ -62,7 +62,6 @@ export default class Experience_Modal extends Component {
         }
       );
       if (response.ok) {
-        this.props.fetch();
       } else {
         const error = await response.json();
         console.log(error);
@@ -85,7 +84,6 @@ export default class Experience_Modal extends Component {
       if (response.ok) {
         let data = await response.json();
         this.PostImage(data.id);
-        this.props.fetch();
         this.props.onHide();
         alert("Experience Added");
       } else {
@@ -110,7 +108,6 @@ export default class Experience_Modal extends Component {
       if (response.ok) {
         let data = await response.json();
         this.PostImage(data.id);
-        this.props.fetch();
         this.props.onHide();
         alert("Experience Updated");
       } else {
@@ -133,8 +130,6 @@ export default class Experience_Modal extends Component {
       if (response.ok) {
         alert("Experience Deleted");
         this.props.onHide();
-        this.props.fetch();
-
       } else {
         alert("Something went wrong!");
       }
@@ -150,15 +145,10 @@ export default class Experience_Modal extends Component {
     });
   };
   componentDidMount(previousProps) {
-    if (this.props._id !== "") {
       this.setState({
         _id: this.props._id,
         token: localStorage.getItem("token"),
-      });
-    }
-
-      this.props.fetch();
-
+      })
   }
 
   render() {
